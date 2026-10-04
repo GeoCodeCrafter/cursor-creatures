@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>cursor creatures</title>
+    <meta name="description" content="Nine creatures that live in your cursor. Vanilla JS and canvas, no libraries." />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="src/style.css" />
+    <style>
+      body {
+        color: rgba(255, 255, 255, 0.85);
+        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 2px, transparent 2.5px);
+        background-size: 48px 48px;
+      }
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 72px 24px 96px;
+      }
+      h1 {
+        margin: 0;
+        font: italic 300 clamp(56px, 9vw, 120px) / 1 var(--serif);
+        letter-spacing: -0.03em;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .sub {
+        margin: 18px 0 48px;
+        font: 500 15px/1.6 var(--mono);
+        color: rgba(255, 255, 255, 0.5);
+        max-width: 60ch;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 28px;
+      }
+      .card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+      .card img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: transform 0.25s ease, border-color 0.25s ease;
+      }
+      .card:hover img,
+      .card:focus-visible img {
+        transform: translateY(-3px);
+        border-color: rgba(160, 240, 255, 0.5);
+      }
+      .card:focus-visible {
+        outline: none;
+      }
+      .card h2 {
+        margin: 14px 0 4px;
+        font: 700 16px/1.3 var(--mono);
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .card p {
+        margin: 0;
+        font: 500 13px/1.55 var(--mono);
+        color: rgba(255, 255, 255, 0.5);
+      }
+      footer {
+        margin-top: 64px;
+        font: 500 13px/1.6 var(--mono);
+        color: rgba(255, 255, 255, 0.35);
+      }
+      footer a {
+        color: rgba(255, 255, 255, 0.55);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>cursor creatures</h1>
+      <p class="sub">things that live in your cursor. pick one and move your mouse. they all do something when you click, and most of them do something worse if you stop moving.</p>
+
+      <div class="grid">
+        <a class="card" href="lizard/">
+          <img src="thumbs/lizard.jpg" alt="A glowing skeleton lizard coiled around the cursor" loading="lazy" />
+          <h2>lizard</h2>
+          <p>click to feed it. once it's full, don't stop moving.</p>
+        </a>
+        <a class="card" href="dragon/">
+          <img src="thumbs/dragon.jpg" alt="A fire dragon breathing fire across the page" loading="lazy" />
+          <h2>dragon</h2>
+          <p>click to breathe fire. it burns the headline. hold it and it burns your cursor.</p>
+        </a>
+        <a class="card" href="fish/">
+          <img src="thumbs/fish.jpg" alt="Hundreds of fish forming a giant cursor arrow" loading="lazy" />
+          <h2>fish</h2>
+          <p>300 of them. click, hold, double click. a shark shows up eventually.</p>
+        </a>
+        <a class="card" href="spider/">
+          <img src="thumbs/spider.jpg" alt="A large spider spinning a web on a website" loading="lazy" />
+          <h2>spider</h2>
+          <p>click and it spins a web. then try to fly through it.</p>
+        </a>
+        <a class="card" href="snake/">
+          <img src="thumbs/snake.jpg" alt="A skeleton snake circling the cursor" loading="lazy" />
+          <h2>snake</h2>
+          <p>stop moving and it strikes. click and it eats its own tail.</p>
+        </a>
+        <a class="card" href="centipede/">
+          <img src="thumbs/centipede.jpg" alt="Eight skeleton centipedes surrounding the cursor" loading="lazy" />
+          <h2>centipede</h2>
+          <p>every click splits it in two. don't get to eight.</p>
+        </a>
+        <a class="card" href="octopus/">
+          <img src="thumbs/octopus.jpg" alt="An octopus holding letters it stole from the headline" loading="lazy" />
+          <h2>octopus</h2>
+          <p>steals the letters off the page. then your cursor.</p>
+        </a>
+        <a class="card" href="trex/">
+          <img src="thumbs/trex.jpg" alt="A T-rex skeleton walking along the bottom of the page" loading="lazy" />
+          <h2>t-rex</h2>
+          <p>roars, jumps, can't reach anything. zip back and forth under it.</p>
+        </a>
+        <a class="card" href="raven/">
+          <img src="thumbs/raven.jpg" alt="A tower of skeleton ravens standing on the cursor" loading="lazy" />
+          <h2>ravens</h2>
+          <p>hold still and one lands on your cursor. click for more. move gently.</p>
+        </a>
+      </div>
+
+      <footer>
+        vanilla js + canvas, no libraries. add <code>?clean</code> to any of them to hide the text in the corners.
+      </footer>
+    </main>
+  </body>
+</html>
