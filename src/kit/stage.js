@@ -47,6 +47,8 @@ export function createStage(opts) {
     const c = el('canvas', `layer layer-${l.name}`);
     if (l.glow) c.style.filter = `drop-shadow(0 0 ${l.blur ?? 7}px ${l.glow})`;
     if (l.blend) c.style.mixBlendMode = l.blend;
+    if (l.filter) c.style.filter = l.filter;
+    if (l.opacity != null) c.style.opacity = l.opacity;
     const ctx = c.getContext('2d');
     canvases[l.name] = ctx;
     all.push({ c, ctx });
@@ -74,6 +76,7 @@ export function createStage(opts) {
       override: null,
     },
     ghost,
+    rand: Math.random,
   };
 
   let dpr = 1;
@@ -168,12 +171,14 @@ export function createStage(opts) {
   };
 
   // ── cursor ───────────────────────────────────────────────────────────────
-  stage.drawArrow = (ctx, x, y, { scale = 1, angle = 0, fill = '#000', stroke = '#fff', alpha = 1 } = {}) => {
+  // `size` is relative to a normal cursor (1 = same size as the real one)
+  stage.drawArrow = (ctx, x, y, { scale = 1, size, angle = 0, fill = '#000', stroke = '#fff', alpha = 1 } = {}) => {
+    const k = (size !== undefined ? size * 1.1 : scale) / stage.Z;
     ctx.save();
     ctx.globalAlpha *= alpha;
     ctx.translate(x, y);
     ctx.rotate(angle);
-    ctx.scale(scale / stage.Z, scale / stage.Z);
+    ctx.scale(k, k);
     ctx.translate(-2, -2);
     ctx.lineJoin = 'round';
     ctx.lineWidth = 2.2;
@@ -265,4 +270,13 @@ export function dot(ctx, x, y, r) {
 export function quad(ctx, a, c, b) {
   ctx.moveTo(a[0], a[1]);
   ctx.quadraticCurveTo(c[0], c[1], b[0], b[1]);
+}
+
+// newer creatures are written as { meta, create(stage) } so the same file can also
+// be driven by a scripted cursor (that's how the videos get made)
+export function play(mod) {
+  const stage = createStage(mod.meta);
+  if (mod.meta.ghost === false) stage.ghost.hidden = true;
+  stage.run(mod.create(stage));
+  return stage;
 }
